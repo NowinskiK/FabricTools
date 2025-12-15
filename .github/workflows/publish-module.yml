@@ -31,14 +31,12 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
       with:
-        ref: ${{ github.ref }}   # checkout the triggered ref (branch or tag)
+        ref: ${{ github.head_ref }}   # checkout the triggered ref (branch or tag)
         fetch-depth: 0
         token: ${{ secrets.GITHUB_TOKEN }}
     - name: Build & Package Module
       shell: pwsh
       run: ./build.ps1 -ResolveDependency -tasks pack
-      env:
-        ModuleVersion: ${{ env.GITVERSION_MAJORMINORPATCH }}
     - name: Publish Build Artifact
       uses: actions/upload-artifact@v4
       with:
@@ -55,7 +53,7 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
       with:
-        ref: ${{ github.ref }}   # checkout the triggered ref (branch or tag)
+        ref: ${{ github.head_ref }}   # checkout the triggered ref (branch or tag)
         fetch-depth: 0
         token: ${{ secrets.GITHUB_TOKEN }}
     - name: Download Build Artifact
@@ -63,3 +61,9 @@ jobs:
       with:
         name: ${{ env.buildArtifactName }}
         path: ${{ env.buildFolderName }}
+    - name: Publish Release
+      shell: pwsh
+      run: ./build.ps1 -tasks publish
+      env:
+        GitHubToken: ${{ secrets.GitHubToken }}
+        GalleryApiToken: ${{ secrets.GalleryApiToken }}
