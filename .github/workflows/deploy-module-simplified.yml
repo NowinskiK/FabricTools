@@ -33,7 +33,7 @@ jobs:
       with:
         ref: ${{ github.ref }}   # checkout the triggered ref (branch or tag)
         fetch-depth: 0
-        token: ${{ secrets.REPO_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Build & Package Module
       shell: pwsh
       run: ./build.ps1 -ResolveDependency -tasks pack
@@ -57,7 +57,7 @@ jobs:
       with:
         ref: ${{ github.ref }}   # checkout the triggered ref (branch or tag)
         fetch-depth: 0
-        token: ${{ secrets.REPO_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Download Build Artifact
       uses: actions/download-artifact@v4
       with:
