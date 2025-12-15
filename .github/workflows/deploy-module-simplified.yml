@@ -63,28 +63,3 @@ jobs:
       with:
         name: ${{ env.buildArtifactName }}
         path: ${{ env.buildFolderName }}
-    - name: Publish Release
-      shell: pwsh
-      run: ./build.ps1 -tasks publish
-      env:
-        GitHubToken: ${{ secrets.GitHubToken }}
-        GalleryApiToken: ${{ secrets.GalleryApiToken }}
-    - name: Merge main -> develop
-        # This step merges the main branch into the develop branch after a successful deployment. This ensures that the develop branch includes the tag for the latest release.
-      run: |
-        git config --local user.email "jpomfret7@gmail.com"
-        git config --local user.name "Automated Jess Did this"
-        git checkout main
-        git pull
-        git checkout develop
-        git pull
-        git merge --no-ff main -m "Auto-merge main back to dev"
-        git push
-    - name: Send Changelog PR
-      shell: pwsh
-      run: ./build.ps1 -tasks Create_ChangeLog_GitHub_PR
-      env:
-        GitHubToken: ${{ secrets.GitHubToken }}
-        GalleryApiToken: ${{ secrets.GalleryApiToken }}
-        ReleaseBranch: main
-        MainGitBranch: main
