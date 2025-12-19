@@ -25,7 +25,7 @@ jobs:
 
           Write-Host "Building the module..."
           ./build.ps1 -ResolveDependency -Tasks noop
-
+          ./build.ps1 -Tasks build
 
           Write-Host "Preparing for import..."
           Get-ChildItem (Join-Path $env:GITHUB_WORKSPACE 'output\module\FabricTools') | Format-Table
