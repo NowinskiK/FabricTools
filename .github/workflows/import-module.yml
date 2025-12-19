@@ -34,6 +34,13 @@ jobs:
 
           $modulePath = Join-Path $env:GITHUB_WORKSPACE 'output\module\FabricTools\0.31.0\FabricTools.psd1'
           Write-Host "Importing module from: $modulePath"
-          Import-Module $modulePath -Force -Verbose
 
-          Write-Host "Module imported successfully"
+          try {
+            Import-Module $modulePath -Force -Verbose
+          }
+          catch {
+            Write-Error "Module import failed: $_"
+            exit 1
+          }
+
+          Write-Host "Module imported successfully."
