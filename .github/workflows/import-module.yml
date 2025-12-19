@@ -12,12 +12,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Import local PowerShell module (Windows PowerShell 5.1)
-        shell: powershell
+        shell: PowerShell
         run: |
           Write-Host "PowerShell version:"
           $PSVersionTable
 
-          $modulePath = Join-Path $env:GITHUB_WORKSPACE 'FabricTools\FabricTools.psd1'
+          $modulePath = Join-Path $env:GITHUB_WORKSPACE 'FabricTools.psd1'
 
           Write-Host "Importing module from: $modulePath"
           Import-Module $modulePath -Force -Verbose
