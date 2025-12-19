@@ -21,7 +21,7 @@ jobs:
           $build = Join-Path $env:GITHUB_WORKSPACE 'helper\build.ps1'
 
           $modulePath = Join-Path $env:GITHUB_WORKSPACE 'FabricTools.psd1'
-          Write-Host "Listing $(env:GITHUB_WORKSPACE) ..."
+          Write-Host "Listing $($env:GITHUB_WORKSPACE) ..."
           Get-ChildItem $env:GITHUB_WORKSPACE
 
           Write-Host "Importing module from: $modulePath"
