@@ -1,0 +1,25 @@
+name: Import PowerShell Module (PS 5.1)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  import-module:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Import local PowerShell module (Windows PowerShell 5.1)
+        shell: powershell
+        run: |
+          Write-Host "PowerShell version:"
+          $PSVersionTable
+
+          $modulePath = Join-Path $env:GITHUB_WORKSPACE 'FabricTools\FabricTools.psd1'
+
+          Write-Host "Importing module from: $modulePath"
+          Import-Module $modulePath -Force -Verbose
+
+          Write-Host "Module imported successfully"
