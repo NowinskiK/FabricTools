@@ -20,14 +20,14 @@ jobs:
           Write-Host "GITHUB_WORKSPACE = $($env:GITHUB_WORKSPACE)"
           $build = Join-Path $env:GITHUB_WORKSPACE 'helper\build.ps1'
 
-          $modulePath = Join-Path $env:GITHUB_WORKSPACE 'FabricTools.psd1'
           Write-Host "Listing $($env:GITHUB_WORKSPACE) ..."
           Get-ChildItem $env:GITHUB_WORKSPACE | Format-Table
 
           Write-Host "Building the module..."
           ./build.ps1 -ResolveDependency -Tasks noop
 
-          #Write-Host "Importing module from: $modulePath"
-          #Import-Module $modulePath -Force -Verbose
+          $modulePath = Join-Path $env:GITHUB_WORKSPACE 'output\module\FabricTools\0.0.1\FabricTools.psd1'
+          Write-Host "Importing module from: $modulePath"
+          Import-Module $modulePath -Force -Verbose
 
-          #Write-Host "Module imported successfully"
+          Write-Host "Module imported successfully"
