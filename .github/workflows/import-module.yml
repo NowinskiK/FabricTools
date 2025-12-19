@@ -30,7 +30,7 @@ jobs:
           Write-Host "Preparing for import..."
           Get-ChildItem (Join-Path $env:GITHUB_WORKSPACE 'output\module\FabricTools') | Format-Table
 
-          $modulePath = Join-Path $env:GITHUB_WORKSPACE 'output\module\FabricTools\0.0.1\FabricTools.psd1'
+          $modulePath = Join-Path $env:GITHUB_WORKSPACE 'output\module\FabricTools\0.31.0\FabricTools.psd1'
           Write-Host "Importing module from: $modulePath"
           Import-Module $modulePath -Force -Verbose
 
