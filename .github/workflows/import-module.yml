@@ -43,4 +43,9 @@ jobs:
             exit 1
           }
 
+          # Explicit validation (THIS is key)
+          if (-not (Get-Module FabricTools)) {
+              throw "Module not imported correctly."
+          }
+
           Write-Host "Module imported successfully."
